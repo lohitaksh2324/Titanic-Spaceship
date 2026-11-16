@@ -107,10 +107,10 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     p = tf1.add_paragraph()
     r = p.add_run()
     r.text = "Live Deployment: "
-    set_font(r, name="Calibri", size=Pt(12), bold=False, color=RGBColor(203, 213, 225))
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=RGBColor(203, 213, 225))
     r_link = p.add_run()
     r_link.text = "https://titanic-spaceship.onrender.com/"
-    set_font(r_link, name="Calibri", size=Pt(12), bold=True, color=TEAL, link="https://titanic-spaceship.onrender.com/")
+    set_font(r_link, name="Calibri", size=Pt(14), bold=True, color=TEAL, link="https://titanic-spaceship.onrender.com/")
 
     # ==========================================
     # SLIDE 2: Problem Statement & Motivation
@@ -160,7 +160,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = text
-        set_font(r, name="Calibri", size=Pt(12), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 3: The Dataset Structure
@@ -237,7 +237,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(10)
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11.5), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 5: Outlier Detection & Capping (IQR Method)
@@ -268,7 +268,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     r.text = ("Traditional row deletion would discard ~22% of passenger records because luxury spend is naturally sparse.\n\n"
               "Winsorization caps extreme values at Q3 + 3.0 × IQR. This bounds extreme numerical disturbance while allowing tree models "
               "to learn from every single passenger.")
-    set_font(r, name="Calibri", size=Pt(12), bold=False, color=TEXT_MUTED)
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     if os.path.exists("images/boxplots_after.png"):
         s5.shapes.add_picture("images/boxplots_after.png", Inches(5.3), Inches(1.8), width=Inches(7.2))
@@ -295,7 +295,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(2)
         r = p.add_run()
         r.text = item
-        set_font(r, name="Consolas", size=Pt(11), bold=False, color=TEXT_MAIN)
+        set_font(r, name="Consolas", size=Pt(14), bold=False, color=TEXT_MAIN)
 
     # ==========================================
     # SLIDE 6: Exploratory Analysis: What Drives Displacement?
@@ -342,7 +342,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11.5), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 7: Exploratory Correlation Analysis
@@ -376,12 +376,12 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(2)
         r = p.add_run()
         r.text = f"• {title}"
-        set_font(r, name="Calibri", size=Pt(12.5), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf7.add_paragraph()
         p.space_after = Pt(8)
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 8: Feature Engineering: Domain Insights
@@ -421,11 +421,11 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(4)
         r = p.add_run()
         r.text = f"Engineered: {feats}"
-        set_font(r, name="Calibri", size=Pt(12), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11.5), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 9: Encoding, Scaling & Train-Validation Split
@@ -465,11 +465,11 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(4)
         r = p.add_run()
         r.text = tech
-        set_font(r, name="Calibri", size=Pt(12), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11.5), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 10: Feature Selection: SelectKBest (ANOVA F-Score)
@@ -493,33 +493,33 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     set_font(r, name="Georgia", size=Pt(16), bold=True, color=DARK_TEAL)
 
     f_scores = [
-        "1. CryoSleep:   F = 1,984.2 (Dominant discriminator)",
-        "2. TotalSpend:  F = 1,142.5 (Aggregated spending)",
-        "3. Spa:         F =   890.3 (Strongest luxury negative)",
-        "4. RoomService: F =   872.1 (Basic cabin spend)",
-        "5. VRDeck:      F =   824.7 (Virtual entertainment spend)",
-        "6. Deck:        F =   412.0 (Physical vertical elevation)"
+        "1. HasSpend:    F = 2,624.9 (Binary spend flag — top discriminator)",
+        "2. CryoSleep:   F = 2,334.3 (Cryo-pod confinement signal)",
+        "3. Spa:         F = 1,095.2 (Strongest luxury negative correlation)",
+        "4. RoomService: F = 1,083.9 (Basic cabin spend signal)",
+        "5. VRDeck:      F =   941.6 (Virtual entertainment spend)",
+        "6. LuxurySpend: F =   736.2 (Spa + VRDeck aggregated luxury)"
     ]
     for row in f_scores:
         p = tf10.add_paragraph()
         p.space_after = Pt(2)
         r = p.add_run()
         r.text = row
-        set_font(r, name="Consolas", size=Pt(11), bold=False, color=TEXT_MAIN)
+        set_font(r, name="Consolas", size=Pt(14), bold=False, color=TEXT_MAIN)
 
     p = tf10.add_paragraph()
     p.space_before = Pt(8)
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "Key Selection Takeaways:"
-    set_font(r, name="Georgia", size=Pt(13), bold=True, color=DARK_TEAL)
+    set_font(r, name="Georgia", size=Pt(14), bold=True, color=DARK_TEAL)
 
     p = tf10.add_paragraph()
     r = p.add_run()
-    r.text = ("• CryoSleep alone accounts for nearly half of total F-score mass.\n"
-              "• TotalSpend & LuxurySpend provide clean separation for awake travelers.\n"
-              "• Both Random Forest and XGBoost exploit all 19 features without multicollinearity penalties.")
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEXT_MUTED)
+    r.text = ("• HasSpend + CryoSleep account for over 65% of total F-score mass.\n"
+              "• Luxury spend features (Spa, VRDeck) provide strong separation for awake travelers.\n"
+              "• All 19 features are used by both Random Forest and XGBoost with no multicollinearity penalty.")
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 11: End-to-End System Architecture
@@ -558,7 +558,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = body
-        set_font(r, name="Calibri", size=Pt(11.5), bold=False, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MAIN)
 
     # ==========================================
     # SLIDE 12: Experiment Tracking & Model Comparison
@@ -583,7 +583,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     p.space_after = Pt(4)
     r = p.add_run()
     r.text = headers
-    set_font(r, name="Consolas", size=Pt(10), bold=True, color=TEAL)
+    set_font(r, name="Consolas", size=Pt(13), bold=True, color=TEAL)
 
     runs = [
         ("RF (Baseline)", "n_est=100, depth=8", "0.7936", "0.8845"),
@@ -598,7 +598,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         r = p.add_run()
         r.text = f"{m:<22} {prms:<23} {acc:<9} {auc}"
         col = DARK_TEAL if is_best else TEXT_MAIN
-        set_font(r, name="Consolas", size=Pt(9.5), bold=is_best, color=col)
+        set_font(r, name="Consolas", size=Pt(13), bold=is_best, color=col)
 
     p = tf12.add_paragraph()
     p.space_before = Pt(12)
@@ -612,7 +612,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     r.text = ("• Achieved highest validation accuracy (81.25%) and ROC-AUC (0.9087).\n"
               "• Serialized to model/model.joblib for live production serving.\n"
               "• 3x faster inference latency than Random Forest ensemble.")
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEXT_MUTED)
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # Right: Tuned XGBoost Feature Importance
     if os.path.exists("images/best_model_feature_importance.png"):
@@ -631,7 +631,7 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     r = p.add_run()
     r.text = ("HasSpend and HomePlanet provide top-level branch discriminators, followed by RoomService, "
               "CryoSleep, and LuxurySpend (Spa + VRDeck).")
-    set_font(r, name="Calibri", size=Pt(10.5), bold=False, color=TEXT_MAIN)
+    set_font(r, name="Calibri", size=Pt(13), bold=False, color=TEXT_MAIN)
 
     # ==========================================
     # SLIDE 13: Final Model Performance: Tuned XGBoost
@@ -663,11 +663,11 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = title
-        set_font(r, name="Calibri", size=Pt(11), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = note
-        set_font(r, name="Calibri", size=Pt(9.5), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(13), bold=False, color=TEXT_MUTED)
 
     if os.path.exists("images/confusion_matrices.png"):
         s13.shapes.add_picture("images/confusion_matrices.png", Inches(0.8), Inches(3.3), width=Inches(6.4))
@@ -712,11 +712,11 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(4)
         r = p.add_run()
         r.text = sub
-        set_font(r, name="Calibri", size=Pt(11.5), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf.add_paragraph()
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     # ==========================================
     # SLIDE 15: Live Project Links, Conclusion & Future Scope
@@ -742,59 +742,59 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "🔗 Live Web App (Render):"
-    set_font(r, name="Calibri", size=Pt(12), bold=True, color=WHITE)
+    set_font(r, name="Calibri", size=Pt(14), bold=True, color=WHITE)
     p = tf15_l.add_paragraph()
     p.space_after = Pt(8)
     r = p.add_run()
     r.text = "https://titanic-spaceship.onrender.com/"
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEAL, link="https://titanic-spaceship.onrender.com/")
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEAL, link="https://titanic-spaceship.onrender.com/")
 
     # 2. Swagger API
     p = tf15_l.add_paragraph()
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "📑 Swagger API Docs:"
-    set_font(r, name="Calibri", size=Pt(12), bold=True, color=WHITE)
+    set_font(r, name="Calibri", size=Pt(14), bold=True, color=WHITE)
     p = tf15_l.add_paragraph()
     p.space_after = Pt(8)
     r = p.add_run()
     r.text = "https://titanic-spaceship.onrender.com/docs"
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEAL, link="https://titanic-spaceship.onrender.com/docs")
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEAL, link="https://titanic-spaceship.onrender.com/docs")
 
     # 3. GitHub
     p = tf15_l.add_paragraph()
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "💻 GitHub Repository:"
-    set_font(r, name="Calibri", size=Pt(12), bold=True, color=WHITE)
+    set_font(r, name="Calibri", size=Pt(14), bold=True, color=WHITE)
     p = tf15_l.add_paragraph()
     p.space_after = Pt(8)
     r = p.add_run()
     r.text = "https://github.com/lohitaksh2324/Titanic-Spaceship"
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEAL, link="https://github.com/lohitaksh2324/Titanic-Spaceship")
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEAL, link="https://github.com/lohitaksh2324/Titanic-Spaceship")
 
     # 4. Kaggle
     p = tf15_l.add_paragraph()
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "📊 Kaggle Submission:"
-    set_font(r, name="Calibri", size=Pt(12), bold=True, color=WHITE)
+    set_font(r, name="Calibri", size=Pt(14), bold=True, color=WHITE)
     p = tf15_l.add_paragraph()
     p.space_after = Pt(8)
     r = p.add_run()
     r.text = "submission.csv (4,277 test predictions generated)"
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=RGBColor(203, 213, 225))
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=RGBColor(203, 213, 225))
 
     # 5. Team
     p = tf15_l.add_paragraph()
     p.space_after = Pt(2)
     r = p.add_run()
     r.text = "👥 Team Members (CSL236):"
-    set_font(r, name="Calibri", size=Pt(12), bold=True, color=WHITE)
+    set_font(r, name="Calibri", size=Pt(14), bold=True, color=WHITE)
     p = tf15_l.add_paragraph()
     r = p.add_run()
     r.text = "Krishna Singla (24csu105) • Lohitaksh (24csu115) • Manya (24csu123)"
-    set_font(r, name="Calibri", size=Pt(11), bold=False, color=RGBColor(203, 213, 225))
+    set_font(r, name="Calibri", size=Pt(14), bold=False, color=RGBColor(203, 213, 225))
 
     # Right: Future Scope Card
     add_card(s15, Inches(6.8), Inches(1.8), Inches(5.733), Inches(4.9), bg_color=WHITE, border_color=CARD_BORDER)
@@ -819,12 +819,12 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
         p.space_after = Pt(2)
         r = p.add_run()
         r.text = title
-        set_font(r, name="Calibri", size=Pt(12.5), bold=True, color=TEXT_MAIN)
+        set_font(r, name="Calibri", size=Pt(14), bold=True, color=TEXT_MAIN)
         p = tf15_r.add_paragraph()
         p.space_after = Pt(8)
         r = p.add_run()
         r.text = desc
-        set_font(r, name="Calibri", size=Pt(11), bold=False, color=TEXT_MUTED)
+        set_font(r, name="Calibri", size=Pt(14), bold=False, color=TEXT_MUTED)
 
     prs.save(filename)
     print(f"Presentation successfully saved to {filename} ({len(prs.slides)} slides)")
