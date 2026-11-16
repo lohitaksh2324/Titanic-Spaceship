@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaceship Titanic — Transported Passenger Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --card-bg: #131b2e;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --success: #10b981;
+            --danger: #ef4444;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.6rem 0.8rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        button {
+            margin-top: 1.2rem;
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .result-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 250px;
+        }
+
+        .badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .badge-transported {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-safe {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .metric {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0.5rem 0;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #1e293b;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #10b981);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .tips-section {
+            margin-top: 1.2rem;
+            text-align: left;
+            width: 100%;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .tips-section h4 {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .tips-section ul {
+            list-style: none;
+        }
+
+        .tips-section li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .tips-section li::before {
+            content: "✦";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SPACESHIP TITANIC</h1>
+        <p class="subtitle">Spacetime Anomaly Collision — Transported Status Predictor</p>
+    </header>
+
+    <div class="container">
+        <!-- Form Card -->
+        <div class="card">
+            <h3 style="margin-bottom: 1rem; color: var(--accent); font-family: 'Orbitron', sans-serif; font-size: 1.1rem;">Passenger Manifest</h3>
+            <form id="predictForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="PassengerId">Passenger ID</label>
+                        <input type="text" id="PassengerId" value="0001_01" required pattern="\d{4}_\d{2}" placeholder="0001_01">
+                    </div>
+                    <div class="form-group">
+                        <label for="HomePlanet">Home Planet</label>
+                        <select id="HomePlanet" required>
+                            <option value="Earth">Earth</option>
+                            <option value="Europa" selected>Europa</option>
+                            <option value="Mars">Mars</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CryoSleep">CryoSleep</label>
+                        <select id="CryoSleep" required>
+                            <option value="true" selected>True (In Pod)</option>
+                            <option value="false">False (Awake)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Cabin">Cabin (Deck/Num/Side)</label>
+                        <input type="text" id="Cabin" value="B/0/P" required pattern="^[A-Za-z]/[0-9]+/[A-Za-z]$" placeholder="B/0/P">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Destination">Destination</label>
+                        <select id="Destination" required>
+                            <option value="TRAPPIST-1e">TRAPPIST-1e</option>
+                            <option value="55 Cancri e" selected>55 Cancri e</option>
+                            <option value="PSO J318.5-22">PSO J318.5-22</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Age">Age (Years)</label>
+                        <input type="number" id="Age" value="28" min="0" max="120" step="1" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="VIP">VIP Status</label>
+                        <select id="VIP" required>
+                            <option value="false" selected>False (Standard)</option>
+                            <option value="true">True (VIP Suite)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="RoomService">Room Service ($)</label>
+                        <input type="number" id="RoomService" value="0" min="0" max="50000" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="FoodCourt">Food Court ($)</label>
+                        <input type="number" id="FoodCourt" value="0" min="0" max="50000" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ShoppingMall">Shopping Mall ($)</label>
+                        <input type="number" id="ShoppingMall" value="0" min="0" max="50000" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="Spa">Spa ($)</label>
+                        <input type="number" id="Spa" value="0" min="0" max="50000" step="0.1">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="VRDeck">VR Deck ($)</label>
+                        <input type="number" id="VRDeck" value="0" min="0" max="50000" step="0.1">
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn">CALCULATE PREDICTION</button>
+            </form>
+        </div>
+
+        <!-- Result Card -->
+        <div class="card result-box" id="resultCard">
+            <div id="initialState" style="color: var(--text-muted);">
+                <p style="font-size: 3rem; margin-bottom: 0.5rem;">🌌</p>
+                <p>Enter passenger parameters and click <strong>Calculate Prediction</strong> to query the ML model.</p>
+            </div>
+
+            <div id="resultState" style="display: none; width: 100%;">
+                <div id="badgeElement" class="badge">TRANSPORTED</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Probability of Dimension Displacement</div>
+                <div class="metric" id="probMetric">0.0%</div>
+                
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="tips-section">
+                    <h4>Anomalous Factors & Insights</h4>
+                    <ul id="tipsList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span>CSL236 End-Term Project</span>
+        <a href="/docs" target="_blank">Swagger API (/docs)</a>
+        <a href="/health" target="_blank">Health Check (/health)</a>
+    </footer>
+
+    <script>
+        document.getElementById('predictForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'QUERYING ANOMALY MATRIX...';
+            btn.disabled = true;
+
+            const payload = {
+                PassengerId: document.getElementById('PassengerId').value,
+                HomePlanet: document.getElementById('HomePlanet').value,
+                CryoSleep: document.getElementById('CryoSleep').value === 'true',
+                Cabin: document.getElementById('Cabin').value,
+                Destination: document.getElementById('Destination').value,
+                Age: parseFloat(document.getElementById('Age').value),
+                VIP: document.getElementById('VIP').value === 'true',
+                RoomService: parseFloat(document.getElementById('RoomService').value || 0),
+                FoodCourt: parseFloat(document.getElementById('FoodCourt').value || 0),
+                ShoppingMall: parseFloat(document.getElementById('ShoppingMall').value || 0),
+                Spa: parseFloat(document.getElementById('Spa').value || 0),
+                VRDeck: parseFloat(document.getElementById('VRDeck').value || 0)
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    alert('Validation Error (422): ' + JSON.stringify(err.detail));
+                    return;
+                }
+
+                const data = await response.json();
+
+                document.getElementById('initialState').style.display = 'none';
+                document.getElementById('resultState').style.display = 'block';
+
+                const badge = document.getElementById('badgeElement');
+                if (data.transported) {
+                    badge.textContent = 'TRANSPORTED TO DIMENSION';
+                    badge.className = 'badge badge-transported';
+                } else {
+                    badge.textContent = 'NOT TRANSPORTED (SAFE)';
+                    badge.className = 'badge badge-safe';
+                }
+
+                const pct = (data.probability * 100).toFixed(1);
+                document.getElementById('probMetric').textContent = `${pct}%`;
+                document.getElementById('progressBar').style.width = `${pct}%`;
+
+                const tipsList = document.getElementById('tipsList');
+                tipsList.innerHTML = '';
+                data.tips.forEach(tip => {
+                    const li = document.createElement('li');
+                    li.textContent = tip;
+                    tipsList.appendChild(li);
+                });
+
+            } catch (err) {
+                alert('Connection error: ' + err.message);
+            } finally {
+                btn.textContent = 'CALCULATE PREDICTION';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
