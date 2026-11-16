@@ -173,27 +173,34 @@
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
         }
 
-        .metric {
-            font-size: 2.2rem;
-            font-weight: 800;
+        .metric-target {
+            font-size: 3.5rem;
+            font-weight: 900;
             font-family: 'Orbitron', sans-serif;
-            margin: 0.5rem 0;
+            margin: 0.2rem 0;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
         }
 
-        .progress-bar-container {
-            width: 100%;
-            height: 10px;
-            background: #1e293b;
-            border-radius: 5px;
-            overflow: hidden;
+        .target-true {
+            color: var(--success);
+            text-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+        }
+
+        .target-false {
+            color: var(--danger);
+            text-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+        }
+
+        .confidence-pill {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #94a3b8;
             margin: 0.5rem 0 1rem;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #38bdf8, #10b981);
-            width: 0%;
-            transition: width 0.6s ease;
         }
 
         .tips-section {
@@ -347,12 +354,13 @@
             </div>
 
             <div id="resultState" style="display: none; width: 100%;">
-                <div id="badgeElement" class="badge">TRANSPORTED</div>
-                <div style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Probability of Dimension Displacement</div>
-                <div class="metric" id="probMetric">0.0%</div>
+                <div id="badgeElement" class="badge">TRANSPORTED: TRUE</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.2rem;">Predicted Classification</div>
+                <div class="metric-target" id="targetMetric">TRUE</div>
+                <div id="targetSummary" style="font-size: 0.95rem; margin-bottom: 0.8rem; color: #cbd5e1;">Passenger was displaced into an alternate spacetime anomaly dimension.</div>
                 
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="progressBar"></div>
+                <div class="confidence-pill" id="confidencePill">
+                    Target: <strong id="boolLabel" style="color: var(--accent);">Transported = True</strong> &nbsp;|&nbsp; Confidence: <span id="confScore">0.0%</span>
                 </div>
 
                 <div class="tips-section">
@@ -410,17 +418,29 @@
                 document.getElementById('resultState').style.display = 'block';
 
                 const badge = document.getElementById('badgeElement');
-                if (data.transported) {
-                    badge.textContent = 'TRANSPORTED TO DIMENSION';
-                    badge.className = 'badge badge-transported';
-                } else {
-                    badge.textContent = 'NOT TRANSPORTED (SAFE)';
-                    badge.className = 'badge badge-safe';
-                }
+                const targetMetric = document.getElementById('targetMetric');
+                const targetSummary = document.getElementById('targetSummary');
+                const boolLabel = document.getElementById('boolLabel');
+                const confScore = document.getElementById('confScore');
 
                 const pct = (data.probability * 100).toFixed(1);
-                document.getElementById('probMetric').textContent = `${pct}%`;
-                document.getElementById('progressBar').style.width = `${pct}%`;
+                confScore.textContent = `${pct}%`;
+
+                if (data.transported === true) {
+                    badge.textContent = 'TRANSPORTED = TRUE';
+                    badge.className = 'badge badge-transported';
+                    targetMetric.textContent = 'TRUE';
+                    targetMetric.className = 'metric-target target-true';
+                    targetSummary.textContent = 'Passenger was displaced into an alternate spacetime anomaly dimension.';
+                    boolLabel.innerHTML = 'Transported = <span style="color: var(--success); font-weight: 700;">True</span>';
+                } else {
+                    badge.textContent = 'TRANSPORTED = FALSE';
+                    badge.className = 'badge badge-safe';
+                    targetMetric.textContent = 'FALSE';
+                    targetMetric.className = 'metric-target target-false';
+                    targetSummary.textContent = 'Passenger was NOT transported (remained safely aboard the Spaceship Titanic).';
+                    boolLabel.innerHTML = 'Transported = <span style="color: var(--danger); font-weight: 700;">False</span>';
+                }
 
                 const tipsList = document.getElementById('tipsList');
                 tipsList.innerHTML = '';
