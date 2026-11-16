@@ -47,6 +47,18 @@ aiml project/
 ├── data/
 │   ├── train.csv                # Training dataset (8,693 rows)
 │   └── test.csv                 # Kaggle test dataset (4,277 rows)
+├── images/                      # EDA and model evaluation plots
+│   ├── target_distribution.png
+│   ├── missing_values.png
+│   ├── categorical_vs_target.png
+│   ├── numerical_distributions.png
+│   ├── correlation_heatmap.png
+│   ├── boxplots_before.png
+│   ├── boxplots_after.png
+│   ├── feature_importance.png
+│   ├── confusion_matrices.png
+│   ├── roc_curves.png
+│   └── best_model_feature_importance.png
 ├── model/
 │   └── model.joblib             # Serialized best model pipeline (preprocessor + model)
 ├── static/
