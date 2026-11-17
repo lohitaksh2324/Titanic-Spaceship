@@ -366,10 +366,10 @@ def build_deck(filename="Spaceship_Titanic_Presentation.pptx"):
     set_font(r, name="Georgia", size=Pt(18), bold=True, color=DARK_TEAL)
 
     corr_insights = [
-        ("Dominant Binary Predictor", "CryoSleep (r = +0.46) exhibits massive positive correlation with displacement. Passengers in pods could not evade the spacetime anomaly."),
-        ("Luxury Expenditure Separation", "Spa (r = -0.37), RoomService (r = -0.36), and VRDeck (r = -0.34) confirm that active amenity spenders were awake and in lower-risk ship compartments."),
-        ("Low Multicollinearity (|r| < 0.25)", "Inter-feature correlations among amenities remain low. FoodCourt vs VRDeck (r = 0.12) and Spa vs RoomService (r = 0.10) ensure each input provides unique signal."),
-        ("No Dimensional Collapse", "Because correlation across independent predictors is modest, tree models can partition both spatial and financial dimensions cleanly.")
+        ("Numerical Correlations with Transported", "RoomService (r = -0.24) and Spa (r = -0.22) are the strongest numerical negative correlators. VRDeck (r = -0.21) also shows clear separation. Note: CryoSleep is boolean, not in this heatmap."),
+        ("Luxury Expenditure Separation", "Spa, RoomService, and VRDeck all show negative correlation with Transported, confirming active amenity spenders were awake and in lower-risk ship compartments."),
+        ("Low Multicollinearity (|r| < 0.25)", "Inter-feature correlations among amenities remain low. FoodCourt vs VRDeck (r = 0.23) is the highest inter-feature value, still well within acceptable range."),
+        ("No Dimensional Collapse", "Because correlations across independent predictors are modest, tree models can partition both spatial and financial dimensions cleanly without redundancy.")
     ]
     for title, desc in corr_insights:
         p = tf7.add_paragraph()
