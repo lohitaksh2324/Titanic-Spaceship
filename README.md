@@ -190,8 +190,8 @@ python drift_check.py
 ## 10. Team Information
 
 - **Course:** CSL236 — Introduction to AI and Machine Learning (Semester 5)
+- **Section:** B.Tech CSE — Semester 5
 - **Institution:** The NorthCap University
 - **Team Members & Responsibilities:**
-  - Member 1: Pipeline architecture, Feature engineering, Model training & MLflow tracking
-  - Member 2: FastAPI development, Pydantic schemas, Web UI & Rule-based tips
-  - Member 3: Pytest automation, Docker containerization, CI/CD GitHub Actions & Documentation
+  - **Lohitaksh Rastogi (24csu115):** Pipeline architecture, EDA, Feature engineering, Model training & MLflow tracking, Kaggle submission generation
+  - **Khushi Sharma (24csu101):** FastAPI development, Pydantic data contract, Web UI, Pytest automation, Docker containerization, CI/CD GitHub Actions & Documentation
